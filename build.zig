@@ -14,7 +14,7 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
 
-    const module = b.addModule("zig-imgui", .{
+    const module = b.addModule("mach-imgui", .{
         .root_source_file = b.path("src/imgui.zig"),
         .imports = &.{
             .{ .name = "mach", .module = mach_dep.module("mach") },
@@ -70,20 +70,23 @@ pub fn build(b: *std.Build) !void {
     // Example
     const build_options = b.addOptions();
 
-    const app = try mach.CoreApp.init(b, mach_dep.builder, .{
+    const example = b.addExecutable(.{
         .name = "mach-imgui-example",
-        .src = "examples/example_mach.zig",
+        .root_source_file = b.path("examples/main.zig"),
         .target = target,
-        .deps = &[_]std.Build.Module.Import{
-            .{ .name = "imgui", .module = module },
-            .{ .name = "build-options", .module = build_options.createModule() },
-        },
         .optimize = optimize,
     });
-    app.compile.linkLibrary(lib);
+
+    example.root_module.addImport("mach", mach_dep.module("mach"));
+    example.root_module.addImport("imgui", module);
+    example.root_module.addImport("build-options", build_options.createModule());
+
+    example.linkLibrary(lib);
+
+    const run_cmd = b.addRunArtifact(example);
 
     const run_step = b.step("run", "Run the example");
-    run_step.dependOn(&app.run.step);
+    run_step.dependOn(&run_cmd.step);
 
     // Generator
     const generator_exe = b.addExecutable(.{
