@@ -8,17 +8,17 @@
     .version = "0.1.0",
     .dependencies = .{
         .mach = .{
-            .url = "https://pkg.machengine.org/mach/c56d596ea90be5502db7a83940f5cca4cce1494f.tar.gz",
-            .hash = "1220301155ab5b19acce86e70c1e844249a6c617e6e36818cfeb5b5a993acee01ab4",
+            .url = "git+https://github.com/hexops/mach.git#af1cf9865bbd7e79e05c1a86560945afd2342891",
+            .hash = "1220e3e557f8659f4b30c66280bcd226d295c59aa4a3e9d2947d575aa202c05acdda",
         },
         .mach_freetype = .{
-            .url = "https://pkg.machengine.org/mach-freetype/d63efa5534c17f3a12ed3d327e0ad42a64adc20a.tar.gz",
+            .url = "git+https://github.com/hexops/mach-freetype.git#359e8721d4b988d6297534164e4976a71c46ec43",
             .hash = "1220adfccce3dbc4e4fa8650fdaec110a676f6b8a1462ed6ef422815207f8288e9d2",
             .lazy = true,
         },
         .imgui = .{
-            .url = "https://github.com/ocornut/imgui/archive/refs/tags/v1.90.tar.gz",
-            .hash = "12206ca5fe2c3d35964b3a1cd30c4ff4e1050852f0062db0dda122513dc9477d5115",
+            .url = "git+https://github.com/ocornut/imgui.git?ref=v1.90#b81bd7ed984ce095c20a059dd0f4d527e006998f",
+            .hash = "1220fd665669a47ab38fe3c849c82250034c9077038a3311dfaf0931f80a26e70685",
         },
     },
 }
