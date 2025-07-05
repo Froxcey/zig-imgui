@@ -27,6 +27,7 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
     lib.linkLibC();
+    module.linkLibrary(lib);
 
     const imgui_dep = b.dependency("imgui", .{});
 
@@ -76,7 +77,6 @@ pub fn build(b: *std.Build) !void {
     });
     exe.root_module.addImport("mach", mach_dep.module("mach"));
     exe.root_module.addImport("imgui", module);
-    exe.linkLibrary(lib);
 
     const run_step = b.step("run", "Run the example");
     run_step.dependOn(&b.addRunArtifact(exe).step);
